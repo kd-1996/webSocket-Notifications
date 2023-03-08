@@ -22,4 +22,9 @@ public class WSService {
     messagingTemplate.convertAndSend("/topic/messages",
         responseMessage);
   }
+  public void sendPrivateMessages(final String Id,final String message) {
+    ResponseMessage responseMessage = new ResponseMessage(message);
+    messagingTemplate.convertAndSendToUser(Id,"/topic/private-messages",
+        responseMessage);
+  }
 }

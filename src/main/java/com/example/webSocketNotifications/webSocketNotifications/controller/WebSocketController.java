@@ -3,6 +3,7 @@ package com.example.webSocketNotifications.webSocketNotifications.controller;
 import com.example.webSocketNotifications.webSocketNotifications.dto.Message;
 import com.example.webSocketNotifications.webSocketNotifications.service.WSService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,5 +24,10 @@ public class WebSocketController {
   @PostMapping("/send-message")
   public void sendMessage(@RequestBody Message message) {
     service.sendMessages(message.getMessageContent());
+  }
+
+  @PostMapping("/sendPrivate-message/{userId}")
+  public void sendPrivateMessage(@PathVariable final String userId,@RequestBody Message message) {
+    service.sendPrivateMessages(userId,message.getMessageContent());
   }
 }
