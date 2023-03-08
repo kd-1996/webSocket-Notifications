@@ -15,9 +15,9 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
   public void registerStompEndpoints(final StompEndpointRegistry registry) {
     registry.addEndpoint("/our-websocket")
         .setHandshakeHandler(new UserHandShakeHandler())
+        .setAllowedOriginPatterns("*")
         .withSockJS();
   }
-
   @Override
   public void configureMessageBroker(final MessageBrokerRegistry registry) {
     registry.enableSimpleBroker("/topic");

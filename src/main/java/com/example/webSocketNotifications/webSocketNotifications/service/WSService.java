@@ -6,7 +6,6 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
-//@EnableScheduling
 public class WSService {
 
   private final SimpMessagingTemplate messagingTemplate;
@@ -16,15 +15,16 @@ public class WSService {
     this.messagingTemplate = messagingTemplate;
   }
 
-  //  @Scheduled(fixedDelay = 5000)
   public void sendMessages(final String message) {
     ResponseMessage responseMessage = new ResponseMessage(message);
-    messagingTemplate.convertAndSend("/topic/messages",
+    String destinationQueue = "/topic/messages/";
+    messagingTemplate.convertAndSend(destinationQueue,
         responseMessage);
   }
-  public void sendPrivateMessages(final String Id,final String message) {
+
+  public void sendPrivateMessages(final String Id, final String message) {
     ResponseMessage responseMessage = new ResponseMessage(message);
-    messagingTemplate.convertAndSendToUser(Id,"/topic/private-messages",
+    messagingTemplate.convertAndSendToUser(Id, "/topic/private-messages",
         responseMessage);
   }
 }
