@@ -24,7 +24,7 @@ function connect() {
     stompClient.connect({}, function (frame) {
         console.log('Connected: ' + frame);
         updateNotificationDisplay();
-        stompClient.subscribe('/topic/messages/475', function (message) {
+        stompClient.subscribe('/topic/messages', function (message) {
             showMessage(JSON.parse(message.body).messageContent);
         });
          stompClient.subscribe('/topic/messages/476', function (message) {
